@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-dark: 222.2 84% 4.9%;
+    --brand-surface: 222.2 84% 10%;
+  }
+
+  body {
+    @apply bg-brand-dark text-slate-100 font-sans selection:bg-brand-accent-primary/30 selection:text-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-white;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-brand-surface/50 backdrop-blur-md border border-slate-800 hover:border-brand-accent-primary/50 transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-brand-accent-primary hover:bg-brand-accent-primary/90 text-white rounded-lg font-medium transition-all shadow-lg shadow-brand-accent-primary/20 hover:shadow-brand-accent-primary/40 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 bg-slate-800/50 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-lg font-medium transition-all active:scale-95;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-accent-primary to-brand-accent-secondary;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-brand-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full hover:bg-slate-700;
+}

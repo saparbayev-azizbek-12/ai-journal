@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Mail, Github, Linkedin, Calendar, MapPin, GraduationCap } from 'lucide-astro';
+
+const experience = [
+  { company: 'AI Labs', role: 'Machine Learning Researcher Intern', period: '2023 - 2024' },
+  { company: 'Tech Solutions', role: 'Python Developer', period: '2022 - 2023' },
+];
+
+const education = [
+  { school: 'Urgench Branch of Tashkent University of Information Technologies', degree: 'Bachelor of Software Engineering', period: '2022 - 2026' },
+];
+---
+
+<Layout title="About Me" description="Learn more about the creator of AI Journal and my background in Machine Learning.">
+  <div class="max-w-4xl mx-auto py-12 space-y-16">
+    <div class="flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
+      <div class="w-32 h-32 md:w-48 md:h-48 rounded-3xl bg-gradient-to-br from-brand-accent-primary to-brand-accent-secondary p-1 flex-shrink-0">
+        <div class="w-full h-full rounded-[20px] bg-brand-dark flex items-center justify-center overflow-hidden border-2 border-brand-dark">
+          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Felix" alt="Avatar" class="w-full h-full object-cover" />
+        </div>
+      </div>
+      
+      <div class="space-y-4">
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">I'm a <span class="gradient-text">ML Enthusiast</span></h1>
+        <p class="text-xl text-slate-400 leading-relaxed">
+          Passionate about building intelligent systems that solve real-world problems. 
+          Focusing on Deep Learning, Computer Vision, and Natural Language Processing.
+        </p>
+        
+        <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-slate-500">
+          <div class="flex items-center gap-2"><MapPin class="w-4 h-4" /> Silicon Valley, CA</div>
+          <div class="flex items-center gap-2"><Calendar class="w-4 h-4" /> Building since 2020</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
+      <div class="space-y-8">
+        <h2 class="text-2xl font-bold border-b border-white/5 pb-4">Experience</h2>
+        <div class="space-y-6">
+          {experience.map(item => (
+            <div class="relative pl-6 border-l border-slate-800">
+              <div class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-brand-accent-primary"></div>
+              <h3 class="font-bold text-white">{item.role}</h3>
+              <p class="text-brand-accent-primary text-sm font-medium">{item.company}</p>
+              <p class="text-slate-500 text-xs mt-1">{item.period}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <h2 class="text-2xl font-bold border-b border-white/5 pb-4">Education</h2>
+        <div class="space-y-6">
+          {education.map(item => (
+            <div class="relative pl-6 border-l border-slate-800 hover:border-brand-accent-secondary/50 transition-colors">
+              <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-brand-accent-secondary shadow-[0_0_10px_rgba(6,182,212,0.5)]"></div>
+              <h3 class="font-bold text-white text-lg">{item.degree}</h3>
+              <p class="text-brand-accent-secondary text-sm font-medium">{item.school}</p>
+              <p class="text-slate-500 text-xs mt-1">{item.period}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card p-8 rounded-3xl text-center space-y-6">
+      <h2 class="text-2xl font-bold">Let's work together</h2>
+      <p class="text-slate-400 max-w-lg mx-auto">
+        I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="saparbayev.azizbek12@gmail.com" class="btn-primary flex items-center gap-2">
+          <Mail class="w-4 h-4" />
+          Send Email
+        </a>
+        <a href="https://github.com/saparbayev-azizbek-12" class="btn-ghost flex items-center gap-2">
+          <Github class="w-4 h-4" />
+          GitHub
+        </a>
+        <a href="" class="btn-ghost flex items-center gap-2">
+          <Linkedin class="w-4 h-4" />
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

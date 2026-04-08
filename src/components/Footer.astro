@@ -1,0 +1,55 @@
+---
+import { Github, Linkedin, Mail, Send } from 'lucide-astro';
+
+const currentYear = new Date().getFullYear();
+
+const socialLinks = [
+  { icon: Github, href: 'https://github.com/saparbayev-azizbek-12', label: 'GitHub' },
+  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Send, href: 'https://t.me/saparbayev_azizbek', label: 'Telegram' },
+  { icon: Mail, href: 'mailto:saparbayev.azizbek12@gmail.com', label: 'Email' },
+];
+---
+
+<footer class="border-t border-white/5 bg-brand-dark pb-12 pt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+      <div class="space-y-4">
+        <h3 class="text-xl font-bold gradient-text">AI Journal</h3>
+        <p class="text-slate-400 max-w-xs text-sm leading-relaxed">
+          Documenting the journey of a Machine Learning enthusiast. 
+          Sharing insights, projects, and learning paths.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-semibold">Quick Links</h4>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li><a href="/learning-path" class="hover:text-brand-accent-primary transition-colors">Learning Path</a></li>
+          <li><a href="/projects" class="hover:text-brand-accent-primary transition-colors">Projects</a></li>
+          <li><a href="/demos" class="hover:text-brand-accent-primary transition-colors">Live Demos</a></li>
+          <li><a href="/about" class="hover:text-brand-accent-primary transition-colors">About Me</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-white font-semibold">Connect</h4>
+        <div class="flex gap-4">
+          {socialLinks.map((social) => (
+            <a
+              href={social.href}
+              aria-label={social.label}
+              class="p-2 rounded-lg bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all active:scale-95"
+            >
+              <social.icon class="w-5 h-5" />
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-white/5 text-center text-slate-500 text-xs">
+      <p>© {currentYear} AI Journal. Built with Astro & Tailwind CSS.</p>
+    </div>
+  </div>
+</footer>

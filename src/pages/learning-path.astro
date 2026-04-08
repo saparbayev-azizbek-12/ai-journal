@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopicCard from '../components/TopicCard.astro';
+import { getCollection } from 'astro:content';
+import { BookOpen } from 'lucide-astro';
+
+const topics = await getCollection('topics');
+const sortedTopics = topics.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Learning Path" description="Follow the machine learning journey from basics to advanced clustering.">
+  <div class="space-y-16 py-8">
+    <div class="max-w-3xl space-y-4">
+      <div class="flex items-center gap-3 text-brand-accent-primary mb-2">
+        <BookOpen class="w-6 h-6" />
+        <span class="text-sm font-bold uppercase tracking-widest">Educational Roadmap</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+        Machine Learning <span class="gradient-text">Topics</span>
+      </h1>
+      <p class="text-slate-400 text-lg leading-relaxed">
+        A curated path from foundational regression models to advanced unsupervised learning. 
+        Each topic includes core concepts, sample implementation, and a link to the full notebook.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {sortedTopics.map((topic, index) => (
+        <TopicCard 
+          index={index + 1}
+          title={topic.data.title}
+          description={topic.data.description}
+          concepts={topic.data.concepts}
+          code={topic.data.code}
+          githubLink={topic.data.githubLink}
+          demoLink={topic.data.demoLink}
+        />
+      ))}
+    </div>
+  </div>
+</Layout>

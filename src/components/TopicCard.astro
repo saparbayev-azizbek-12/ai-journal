@@ -1,0 +1,65 @@
+---
+import { ExternalLink, Github, Layers } from 'lucide-astro';
+import CodeBlock from './CodeBlock.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  concepts: string[];
+  code: string;
+  githubLink: string;
+  demoLink?: string;
+  index: number;
+}
+
+const { title, description, concepts, code, githubLink, demoLink, index } = Astro.props;
+---
+
+<div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-300">
+  <div class="flex items-start justify-between">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-brand-accent-primary group-hover:scale-110 transition-transform duration-300">
+        <span class="text-xl font-bold">{index}</span>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold group-hover:text-brand-accent-primary transition-colors">{title}</h3>
+        <p class="text-slate-400 text-sm mt-1">{description}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <div class="flex flex-wrap gap-2 text-xs">
+      {concepts.map((concept) => (
+        <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">
+          {concept}
+        </span>
+      ))}
+    </div>
+
+    <CodeBlock code={code} />
+
+    <div class="flex flex-wrap gap-3 mt-4">
+      <a
+        href={githubLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-ghost text-xs py-2 flex items-center gap-2 group-hover:border-slate-700"
+      >
+        <Github class="w-4 h-4" />
+        View Full Notebook
+      </a>
+      {demoLink && (
+        <a
+          href={demoLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary text-xs py-2 flex items-center gap-2"
+        >
+          <ExternalLink class="w-4 h-4" />
+          Live Demo
+        </a>
+      )}
+    </div>
+  </div>
+</div>

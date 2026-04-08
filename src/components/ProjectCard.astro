@@ -1,0 +1,68 @@
+---
+import { ArrowRight, Github, Monitor } from 'lucide-astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  githubLink: string;
+  demoLink?: string;
+  slug: string;
+}
+
+const { title, description, image, tags, githubLink, demoLink, slug } = Astro.props;
+---
+
+<div class="glass-card rounded-2xl overflow-hidden group flex flex-col h-full">
+  <div class="aspect-video overflow-hidden relative">
+    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent z-10"></div>
+    <img 
+      src={image} 
+      alt={title} 
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+    />
+    <div class="absolute bottom-4 left-4 z-20 flex flex-wrap gap-2">
+      {tags.map(tag => (
+        <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-brand-accent-primary text-white">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <div class="p-6 flex flex-col flex-grow bg-slate-900/40">
+    <h3 class="text-xl font-bold mb-3 group-hover:text-brand-accent-primary transition-colors">{title}</h3>
+    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">{description}</p>
+    
+    <div class="flex items-center gap-4 mt-auto">
+      <a 
+        href={githubLink}
+        target="_blank"
+        class="text-slate-400 hover:text-white transition-colors"
+        aria-label="GitHub Repository"
+      >
+        <Github class="w-5 h-5" />
+      </a>
+      {demoLink && (
+        <a 
+          href={demoLink}
+          target="_blank"
+          class="text-slate-400 hover:text-white transition-colors"
+          aria-label="Live Demo"
+        >
+          <Monitor class="w-5 h-5" />
+        </a>
+      )}
+      <div class="ml-auto">
+        <a 
+          href={`/projects/${slug}`}
+          class="flex items-center gap-2 text-sm font-semibold text-brand-accent-primary hover:text-brand-accent-secondary transition-colors group/link"
+        >
+          Details
+          <ArrowRight class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

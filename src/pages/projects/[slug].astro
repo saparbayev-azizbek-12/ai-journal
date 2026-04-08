@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { Github, Monitor, ArrowLeft, Calendar, Tag, ExternalLink } from 'lucide-astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<Layout title={project.data.title} description={project.data.description}>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <!-- Back Button -->
+    <a href="/projects" class="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8 group">
+      <ArrowLeft class="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+      Back to Projects
+    </a>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <!-- Main Content -->
+      <div class="lg:col-span-2 space-y-8">
+        <div class="aspect-video rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
+          <img 
+            src={project.data.image} 
+            alt={project.data.title} 
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <div class="space-y-6">
+          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+            {project.data.title}
+          </h1>
+          
+          <div class="flex flex-wrap gap-4 text-sm text-slate-400">
+            <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10">
+              <Calendar class="w-4 h-4" />
+              <span>Project Order: {project.data.order}</span>
+            </div>
+            {project.data.tags.map(tag => (
+              <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent-primary/10 border border-brand-accent-primary/20 text-brand-accent-primary">
+                <Tag class="w-4 h-4" />
+                <span>{tag}</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="prose prose-invert prose-lg max-w-none">
+            <p class="text-xl text-slate-300 leading-relaxed">
+              {project.data.description}
+            </p>
+            <Content />
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-8">
+        <div class="glass-card p-6 rounded-3xl border border-white/10 sticky top-24">
+          <h3 class="text-xl font-bold mb-6">Project Resources</h3>
+          
+          <div class="space-y-4">
+            <a 
+              href={project.data.githubLink} 
+              target="_blank" 
+              class="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all group"
+            >
+              <div class="flex items-center gap-3">
+                <div class="p-2 bg-slate-800 rounded-xl">
+                  <Github class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p class="font-bold text-sm">Source Code</p>
+                  <p class="text-xs text-slate-400">View on GitHub</p>
+                </div>
+              </div>
+              <ExternalLink class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" />
+            </a>
+
+            {project.data.demoLink && (
+              <a 
+                href={project.data.demoLink} 
+                target="_blank" 
+                class="flex items-center justify-between p-4 rounded-2xl bg-brand-accent-primary/10 hover:bg-brand-accent-primary/20 border border-brand-accent-primary/20 transition-all group"
+              >
+                <div class="flex items-center gap-3">
+                  <div class="p-2 bg-brand-accent-primary rounded-xl">
+                    <Monitor class="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p class="font-bold text-sm text-brand-accent-primary">Live Demo</p>
+                    <p class="text-xs text-brand-accent-primary/70">Test the model</p>
+                  </div>
+                </div>
+                <ExternalLink class="w-4 h-4 text-brand-accent-primary group-hover:scale-110 transition-transform" />
+              </a>
+            )}
+          </div>
+
+          <div class="mt-8 pt-8 border-t border-white/5">
+            <p class="text-sm text-slate-400 leading-relaxed italic">
+              "This project demonstrates advanced machine learning techniques implemented with professional standards."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

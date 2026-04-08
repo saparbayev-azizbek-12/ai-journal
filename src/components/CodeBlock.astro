@@ -1,0 +1,82 @@
+---
+import { Check, Copy } from 'lucide-astro';
+
+interface Props {
+  code: string;
+  lang?: string;
+}
+
+const { code, lang = 'python' } = Astro.props;
+---
+
+<div class="code-block relative group rounded-xl bg-slate-900/50 border border-slate-800 overflow-hidden my-6">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-slate-800 bg-slate-900/80">
+    <div class="flex items-center gap-2">
+      <div class="flex gap-1.5">
+        <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+      </div>
+      <span class="text-[10px] font-mono text-slate-500 uppercase tracking-widest ml-2">{lang}</span>
+    </div>
+    <button
+      class="copy-btn p-1.5 rounded-md hover:bg-white/5 text-slate-400 hover:text-white transition-all active:scale-90"
+      data-code={code}
+      title="Copy code"
+    >
+      <div class="copy-icon">
+        <Copy class="w-4 h-4" />
+      </div>
+      <div class="check-icon hidden">
+        <Check class="w-4 h-4 text-emerald-500" />
+      </div>
+    </button>
+  </div>
+  
+  <div class="p-4 overflow-x-auto custom-scrollbar text-sm">
+    <pre class="font-mono leading-relaxed"><code class="text-indigo-300">{code}</code></pre>
+  </div>
+</div>
+
+<script>
+  function setupCopyButtons() {
+    const buttons = document.querySelectorAll('.copy-btn');
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', async () => {
+        const code = button.getAttribute('data-code');
+        if (!code) return;
+
+        try {
+          await navigator.clipboard.writeText(JSON.parse(`"${code}"`).replace(/\\n/g, '\n'));
+          
+          const copyIcon = button.querySelector('.copy-icon');
+          const checkIcon = button.querySelector('.check-icon');
+          
+          copyIcon?.classList.add('hidden');
+          checkIcon?.classList.remove('hidden');
+          
+          setTimeout(() => {
+            copyIcon?.classList.remove('hidden');
+            checkIcon?.classList.add('hidden');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy text: ', err);
+        }
+      });
+    });
+  }
+
+  // Handle View Transitions
+  setupCopyButtons();
+  document.addEventListener('astro:after-swap', setupCopyButtons);
+</script>
+
+<style>
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-800 rounded-full;
+  }
+</style>

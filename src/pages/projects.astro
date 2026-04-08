@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { FolderGit2 } from 'lucide-astro';
+
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Projects" description="Explore my major Machine Learning projects and case studies.">
+  <div class="space-y-16 py-8">
+    <div class="max-w-3xl space-y-4">
+      <div class="flex items-center gap-3 text-brand-accent-primary mb-2">
+        <FolderGit2 class="w-6 h-6" />
+        <span class="text-sm font-bold uppercase tracking-widest">Case Studies</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+        Major <span class="gradient-text">Projects</span>
+      </h1>
+      <p class="text-slate-400 text-lg leading-relaxed">
+        A collection of end-to-end Machine Learning systems, ranging from computer vision to predictive analytics.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {sortedProjects.map((project) => (
+        <ProjectCard 
+          title={project.data.title}
+          description={project.data.description}
+          image={project.data.image}
+          tags={project.data.tags}
+          githubLink={project.data.githubLink}
+          demoLink={project.data.demoLink}
+          slug={project.slug}
+        />
+      ))}
+    </div>
+  </div>
+</Layout>
