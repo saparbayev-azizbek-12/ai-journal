@@ -1,0 +1,104 @@
+---
+---
+
+<div id="page-loader" class="loader-overlay">
+  <div class="loader-container">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Initializing Neural Engine...</div>
+  </div>
+</div>
+
+<style>
+  .loader-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #020617; /* Matches brand-dark */
+    z-index: 10000;
+    transition: opacity 0.5s ease, visibility 0.5s;
+    backdrop-filter: blur(10px);
+  }
+
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .loader-ring {
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(99, 102, 241, 0.1);
+    border-top: 3px solid #6366f1;
+    border-right: 3px solid #06b6d4;
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.4));
+  }
+
+  .loader-text {
+    margin-top: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #06b6d4;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.98); }
+  }
+
+  .loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+</style>
+
+<script>
+  function hideLoader() {
+    const loader = document.getElementById('page-loader');
+    if (loader && !loader.classList.contains('loader-hidden')) {
+      loader.classList.add('loader-hidden');
+    }
+  }
+
+  function showLoader() {
+    const loader = document.getElementById('page-loader');
+    if (loader) {
+      loader.classList.remove('loader-hidden');
+    }
+  }
+
+  // Initial load handling
+  if (document.readyState === 'complete') {
+    hideLoader();
+  } else {
+    window.addEventListener('load', hideLoader);
+  }
+
+  // Astro View Transitions handling
+  // 'astro:before-preparation' starts the fetch
+  document.addEventListener('astro:before-preparation', () => {
+    showLoader();
+  });
+
+  // 'astro:page-load' fires on every page change (initial and subsequent)
+  // This is the safest place to hide the loader with ViewTransitions
+  document.addEventListener('astro:page-load', () => {
+    hideLoader();
+  });
+
+  // Fallback
+  setTimeout(hideLoader, 3000);
+</script>

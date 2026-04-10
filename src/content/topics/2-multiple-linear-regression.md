@@ -14,6 +14,5 @@ code: |
 
   y_pred = model.predict(scaler.transform(X_test))
 githubLink: "https://github.com/saparbayev-azizbek-12/bi-and-ai-talents-ml/tree/main/supervised/02%20multi%20linear%20reg"
-demoLink: "#"
 order: 2
 ---
