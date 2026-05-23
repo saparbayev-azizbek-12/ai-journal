@@ -1,0 +1,24 @@
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+.theme-toggle-btn:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+.theme-icon { font-size: 0.85rem; line-height: 1; }
+.theme-hidden { display: none; }

@@ -1,0 +1,15 @@
+---
+import '../styles/components/theme-toggle.css';
+---
+
+<button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme" title="Toggle light/dark">
+  <span id="theme-icon-light" class="theme-icon">☀️</span>
+  <span id="theme-icon-dark" class="theme-icon theme-hidden">🌙</span>
+  <span id="theme-label">Light</span>
+</button>
+
+<script>
+  import { setupTheme } from '../scripts/theme-toggle';
+  setupTheme();
+  document.addEventListener('astro:after-swap', setupTheme);
+</script>

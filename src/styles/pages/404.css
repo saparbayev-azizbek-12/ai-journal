@@ -1,0 +1,57 @@
+.not-found {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+
+.nf-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.nf-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.nf-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0;
+}
+.nf-title em { font-style: italic; color: var(--accent); }
+
+.nf-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 380px;
+}
+
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  width: fit-content;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.nf-btn:hover { opacity: 0.88; transform: translateY(-1px); color: #fff; }

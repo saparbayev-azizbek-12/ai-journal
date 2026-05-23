@@ -10,11 +10,11 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'AI Journal - A professional Machine Learning portfolio showcasing projects and learning path.' } = Astro.props;
+const { title, description = 'AI Journal - A Machine Learning portfolio documenting projects and learning paths.' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -23,35 +23,28 @@ const { title, description = 'AI Journal - A professional Machine Learning portf
     <meta name="generator" content={Astro.generator} />
     <title>{title} | AI Journal</title>
     <ViewTransitions />
+    <!-- Prevent flash of wrong theme -->
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
-  <body class="min-h-screen flex flex-col selection:bg-brand-accent-primary/30 antialiased text-slate-100">
+  <body>
     <PageLoader />
-    <div class="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-950/20 via-brand-dark to-brand-dark"></div>
-    
+
     <header class="sticky top-0 z-50">
       <Navbar />
     </header>
 
-    <main class="flex-grow container mx-auto px-4 py-8 md:py-12 max-w-7xl">
+    <main class="min-h-screen">
       <slot />
     </main>
 
     <Footer />
-
-    <style is:global>
-      :root {
-        --accent: 99, 102, 241;
-        --accent-light: 6, 182, 212;
-      }
-      
-      .dark {
-        color-scheme: dark;
-      }
-
-      /* Basic animations */
-      .page-enter {
-        animation: fade-in 0.5s ease-out;
-      }
-    </style>
   </body>
 </html>

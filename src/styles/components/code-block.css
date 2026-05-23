@@ -1,0 +1,116 @@
+/* Code block — CSS variables only, works in both light and dark mode */
+
+.code-block {
+  border: none;
+  overflow: hidden;
+  background: #f0f2f5;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: rgba(0,0,0,0.04);
+}
+
+.code-block-dots {
+  display: flex;
+  gap: 4px;
+  margin-right: 0.2rem;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  opacity: 0.75;
+}
+.dot-red    { background: #ef4444; }
+.dot-yellow { background: #f59e0b; }
+.dot-green  { background: #22c55e; }
+
+.code-block-lang {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666;
+  flex: 1;
+}
+
+.copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.copy-btn:hover {
+  background: rgba(0,0,0,0.08);
+  color: #333;
+}
+
+.cb-hidden { display: none; }
+
+.code-block-body {
+  padding: 0.8rem;
+  max-height: 148px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.code-block-body pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.code-block-body code {
+  font-size: 0.71rem;
+  line-height: 1.7;
+  color: #1e293b;
+}
+
+/* ── Dark mode overrides ── */
+html.dark .code-block {
+  background: #0d1117;
+}
+
+html.dark .code-block-header {
+  background: #161b22;
+  border-color: rgba(255,255,255,0.06);
+}
+
+html.dark .code-block-lang {
+  color: #8b949e;
+}
+
+html.dark .copy-btn {
+  color: #8b949e;
+}
+html.dark .copy-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: #e6edf3;
+}
+
+html.dark .code-block-body code {
+  color: #c9d1d9;
+}
+
+/* Scrollbar */
+.code-block-body::-webkit-scrollbar { height: 3px; width: 3px; }
+.code-block-body::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 2px;
+}
+html.dark .code-block-body::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+}
