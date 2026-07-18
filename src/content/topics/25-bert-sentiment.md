@@ -1,10 +1,11 @@
 ---
-title: "Sentiment Analysis with BERT"
-description: "Fine-tuning a pre-trained BERT model for sentiment analysis tasks using Hugging Face Transformers."
-concepts: ["Transformers","BERT","Sentiment Analysis","Fine-tuning"]
+title: "Name Generation with RNN (Part 2)"
+description: "Extending the character-level RNN name generator with improved sampling and temperature-based generation."
+concepts: ["Character-level RNN","Temperature Sampling","Text Generation"]
 code: |
-  from transformers import AutoModelForSequenceClassification
-  model = AutoModelForSequenceClassification.from_pretrained("google-bert/bert-base-uncased", num_labels=2)
-githubLink: "https://github.com/saparbayev-azizbek-12/bi-and-ai-talents-dl/tree/main/lesson-20"
+  def sample(category, start_letter='A'):
+      hidden = rnn.initHidden()
+      output, hidden = rnn(category_tensor, input[0], hidden)
+githubLink: "https://github.com/saparbayev-azizbek-12/bi-and-ai-talents-dl/tree/main/lesson-25"
 order: 25
 ---

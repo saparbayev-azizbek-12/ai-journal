@@ -1,9 +1,10 @@
 ---
-title: "Advanced RNN Applications"
-description: "Applying Recurrent Neural Networks to real-world sequence modeling tasks."
-concepts: ["Sequence to Sequence","LSTMs","Time-series"]
+title: "Name Generation with RNN"
+description: "Building a character-level RNN to generate names by learning from real name datasets."
+concepts: ["Character-level RNN","Name Generation","Sequence Modeling"]
 code: |
-  self.lstm = nn.LSTM(input_size, hidden_size, num_layers=2, batch_first=True)
-githubLink: "https://github.com/saparbayev-azizbek-12/bi-and-ai-talents-dl/tree/main/lesson-19"
+  output, hidden = rnn(input_tensor, hidden)
+  topi = output.topk(1)[1][0][0]
+githubLink: "https://github.com/saparbayev-azizbek-12/bi-and-ai-talents-dl/tree/main/lesson-24"
 order: 24
 ---
