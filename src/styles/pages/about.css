@@ -63,6 +63,17 @@
 }
 .timeline-role { font-size: 1rem; font-weight: 700; color: var(--text); margin: 0; }
 .timeline-company { font-size: 0.83rem; color: var(--accent); margin: 0; }
+.timeline-company-link {
+  display: inline-block;
+  text-decoration: none;
+  width: fit-content;
+  transition: opacity 0.15s, color 0.15s;
+}
+.timeline-company-link:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 .contact-section {
   display: grid;

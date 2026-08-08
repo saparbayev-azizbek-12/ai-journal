@@ -4,9 +4,24 @@ import Layout from '../layouts/Layout.astro';
 import { Mail, Github, Linkedin, Send } from 'lucide-astro';
 
 const experience = [
-  { company: 'UzbekHydroEnergo', role: 'Machine Learning Engineer', period: '2026 – Present' },
-  { company: 'MAAB Innovation', role: 'Database Developer', period: '2025 – 2026' },
-  { company: 'AmuSoft',         role: 'Backend Developer',  period: '2024 – 2026' },
+  {
+    company: 'UzbekHydroEnergo',
+    role: 'Machine Learning Engineer',
+    period: '2026 – Present',
+    url: 'https://uzgidro.uz/',
+  },
+  {
+    company: 'MAAB Innovation',
+    role: 'Database Developer',
+    period: '2025 – 2026',
+    url: 'https://maab.uz/',
+  },
+  {
+    company: 'AmuSoft',
+    role: 'Backend Developer',
+    period: '2024 – 2026',
+    url: 'https://amusoft.uz/',
+  },
 ];
 
 const education = [
@@ -39,7 +54,18 @@ const education = [
               <div class="timeline-body">
                 <p class="timeline-period">{item.period}</p>
                 <h3 class="timeline-role">{item.role}</h3>
-                <p class="timeline-company">{item.company}</p>
+                {item.url ? (
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="timeline-company timeline-company-link"
+                  >
+                    {item.company}
+                  </a>
+                ) : (
+                  <p class="timeline-company">{item.company}</p>
+                )}
               </div>
             </div>
           ))}
@@ -75,16 +101,21 @@ const education = [
           I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
         </p>
         <div class="contact-btns">
-          <a href="mailto:saparbayev.azizbek12@gmail.com" class="about-btn-primary">
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=saparbayev.azizbek12@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="about-btn-primary"
+          >
             <Mail class="w-4 h-4" /> Send Email
           </a>
-          <a href="https://github.com/saparbayev-azizbek-12" target="_blank" rel="noopener" class="about-btn-outline">
+          <a href="https://github.com/saparbayev-azizbek-12" target="_blank" rel="noopener noreferrer" class="about-btn-outline">
             <Github class="w-4 h-4" /> GitHub
           </a>
-          <a href="https://www.linkedin.com/in/azizbek-saparbayev-9a3300357/" target="_blank" rel="noopener" class="about-btn-outline">
+          <a href="https://www.linkedin.com/in/azizbek-saparbayev-9a3300357/" target="_blank" rel="noopener noreferrer" class="about-btn-outline">
             <Linkedin class="w-4 h-4" /> LinkedIn
           </a>
-          <a href="https://t.me/saparbayev_azizbek" target="_blank" rel="noopener" class="about-btn-outline">
+          <a href="https://t.me/saparbayev_azizbek" target="_blank" rel="noopener noreferrer" class="about-btn-outline">
             <Send class="w-4 h-4" /> Telegram
           </a>
         </div>
